@@ -1,0 +1,32 @@
+SeaYou is an app for people looking for companions to rent a yacht/boat.
+Renting a yacht is relatively expensive, so people could cooperate to reduce costs.
+
+User stories:
+
+A user can browse the feed with offers to rent a boat sorted in chronological order, and filter them by destination or a number of passengers.
+A user can respond to an offer, ask for additional info, check the author’s profile, or save it to their favorites.
+A user can post its own offer to rent a boat together.
+
+Story 1.
+A user logs in the app using their username and password.
+
+Story 2.
+If they don’t have an account yet, they can sign up and add basic info and a photo.
+
+Story 3.
+If the login is successful, the user sees the feed with recent posts from other users looking for sailing buddies.
+
+Story 4.
+The user can filter the feed or search for a relevant offer by adding some criteria (dates, destination, etc.)
+
+Story 5.
+If the user is interested in an offer, they can accept it, by pressing the button «accept», contact the author and request additional info («more info»), or save the offer to the favorites («heart» button).
+
+Story 6.
+If the user decides to request more info, there will be a pop-up window with a text box (a direct messaging feature).
+
+Story 7.
+The user can check the profile of the person who offered a journey. They can see the person’s name, picture, and basic info (e.g. interests or hobbies).
+
+Story 8.
+The user can make its own offer to rent a boat, indicate the dates and destination, and post it to the feed. Once posted, other users will be able to see it in their feed, accept it, save to favorites, or request some additional info.
