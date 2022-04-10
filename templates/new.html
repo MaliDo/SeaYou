@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block navbar %}
+<div class="navbar-item">
+    <div class="buttons">
+        <button class="button">
+            <span class="icon">
+            <i class="fas fa-heart has-text-primary"></i>
+            </span>
+        </button>
+    </div>
+</div>
+<div class="navbar-item">
+    <div class="buttons">
+        <a class="button has-background-primary-light" href="{{ url_for('feed') }}">
+        <strong>Inbox</strong>
+        </a>
+    </div>
+</div>
+{% endblock %}
+

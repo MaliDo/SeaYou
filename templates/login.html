@@ -1,34 +1,36 @@
 {% extends 'main.html' %}
 
-    {% block login %}
-    <form class="box" style="box-shadow: none;">
-      <div class="login has-background-primary-light">
+{% block login %}
+  <div class="field is-centered">
+    <form class="box login" style="width: 30%; margin: 30pt auto;">
+      <div class="field">
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" type="email" placeholder="e.g. h.potter@hogwards.edu">
+            <input class="input is-primary" type="email" placeholder="e.g. h.potter@hogwards.edu">
           </div>
         </div>
       
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input class="input" type="password" placeholder="********">
+            <input class="input is-primary" type="password" placeholder="********">
           </div>
         </div>
       
         <div class="buttons">
-          <a class="button is-primary" style="width: 100px" href="{{ url_for('feed') }}">
+          <a class="button has-background-primary" style="width: 100px" href="{{ url_for('feed') }}">
           <strong>Log In</strong>
           </a>
         </div>
 
         <div class="buttons">
-          <a class="button is-primary" style="width: 100px" href="{{ url_for('signup') }}">
+          <a class="button has-background-primary" style="width: 100px" href="{{ url_for('signup') }}">
           <strong>Sign Up</strong>
           </a>
         </div>
 
       </div>
     </form>
-    {% endblock %}
+  </div>
+{% endblock %}

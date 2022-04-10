@@ -23,3 +23,8 @@ def signup():
 def feed():
     title = 'SeaYou - My Feed'
     return render_template('feed.html', title=title, offers=offers)
+
+@app.route("/new")
+def new():
+    title = 'SeaYou - New Offer'
+    return render_template('new.html', title=title, offers=offers)
