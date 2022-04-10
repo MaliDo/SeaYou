@@ -1,0 +1,20 @@
+
+.navbar {
+    box-shadow:  10px 5px 5px grey;
+    border: solid 1pt grey;
+}
+.login {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30pt;
+    border: solid 1pt grey;
+    box-shadow: 10px 5px 5px grey;
+    display: block;
+    position: relative;
+    width: 30%;
+    height: auto;
+}
+
+.offer {
+    border: solid 1px black;
+}

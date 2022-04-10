@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SeaYou</title>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+            .info {font-size: 14pt;}
+            ol {counter-reset: item;}
+            ol li {display: block;}
+            ol li:before {content: counter(item) ". "; counter-increment: item; font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        <p class="info"><strong>SeaYou</strong> is an app for people looking for companions to rent a yacht/boat.<br>
+            Renting a yacht is relatively expensive, so people could cooperate to reduce costs.</p>
+        <p class="info">User stories:</p>
+        <ol>
+            <li>A user can browse the feed with offers to rent a boat sorted in chronological order, and filter them by destination or a number of passengers.</li>
+            <li>A user can respond to an offer, ask for additional info, check the author's profile, or save it to their favorites.</li>
+            <li>A user can post its own offer to rent a boat together.</li>
+        </ol>
+        <h3>Story 1.</h3>
+            <p>A user <u>logs in</u> the app with their username and password.<br>
+            If they don't have an account yet, they can <u>sign up</u> and add basic info and a photo.</p>
+        <h3>Story 2.</h3>
+            <p>After the login/signup, the user sees the <u>feed</u> with recent posts from other users looking for sailing buddies.<br>
+            The user can filter offers by date of departure, trip duration, date of arrival, port of departure, port of arrival, number of passengers, and price per passenger, or search for an offer using specific keywords.</p>
+        <h3>Story 3.</h3>
+            <p>If the user is interested in an offer, they can accept it by pressing the button "accept" and the relevant message will be sent to the offering person. The user can also contact the offerer and request additional info ("request info" button), or add the offer to favorites ("heart" button).<br>
+            If the user decides to request more info, a <u>textbox</u> window will pop up after pressing the "request info" button to send a direct message to the offerer.</p>
+        <h3>Story 4.</h3>
+            <p>The user can check the <u>profile</u> of the person who offered a journey. They can see the person's name, picture, number of offers and completed trips, as well as basic info (e.g. interests or hobbies).</p>
+        <h3>Story 5.</h3>
+            <p>The user can make their <u>own offer</u> to rent a boat, indicate the date of departure, trip duration, date of arrival, port of departure, port of arrival, number of passengers, and price per passenger, include pictures, and post it to the feed. Once posted, other users will be able to see it in their feed, accept it, add to favorites, or request some additional info.</p>
+        <p> </p>
+    </body>
+</html>
+

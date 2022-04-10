@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+
+{% block signup %}
+<div class="field is-centered">
+  <form class="box" style="box-shadow: none; width: 50%; margin: 30pt auto;">
+    <div class="columns field">
+
+      <div class="column is-two-thirds">
+        <div class="columns">
+
+          <div class="column">
+            <div class="field">
+              <label class="label">First name</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Harry">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Username</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-success" type="text" placeholder="HPotter" value="HPotter">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
+              </div>
+              <p class="help is-success">This username is available</p>
+            </div>
+
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label class="label">Last name</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Potter">
+              </div>
+            </div>
+
+            <div class="field control is-expanded">
+              <label class="label">Date of birth</label>
+              <div class="control">
+                <input class="input is-primary" type="date" placeholder="Date of arrival">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+            </div>
+          <p class="help is-danger">This email is invalid</p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="Password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+
+      </div>
+
+      <div class="column" style="text-align: center;">
+        <div class="field">
+          <span class="control">
+            <label class="label">Profile picture</label>
+            <figure class="image is-1by1">
+              <img style="border: 1px solid black;" class="is-rounded" src="{{ url_for('static', filename='chebu.jpg') }}">
+            </figure>
+          </span>
+        </div>
+        <div class="buttons is-centered">
+          <button class="button is-primary">Submit</button>
+        </div>
+      </div>
+
+    </div>
+  
+  </form>
+  <div class="buttons is-centered">
+    <button class="button is-primary is-medium">Sign Up</button>
+  </div>
+</div>
+
+{% endblock %}
