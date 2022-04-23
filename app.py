@@ -1,8 +1,21 @@
 from flask import Flask, render_template
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 from data import offers
 from datetime import datetime
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = {
+    "admin": generate_password_hash("admin123"),
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and \
+            check_password_hash(users.get(username), password):
+        return username
 
 @app.route("/")
 def main():
@@ -10,6 +23,7 @@ def main():
     return render_template('home.html', title=title)
 
 @app.route("/login")
+@auth.login_required
 def login():
     title = 'SeaYou - LogIn'
     return render_template('login.html', title=title)
