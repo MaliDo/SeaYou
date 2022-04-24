@@ -43,13 +43,8 @@
                                         <div class="media-content">
                                             <div class="content">
                                             <p>
-                                                <strong><u>{{ offer['Name'] }}</u></strong> <small>@{{ offer['Username'] }}</small> <small>posted on {{ (offer['OfferDate']).strftime('%b %d, %H:%m') }}</small>
-                                                <br>
+                                                <strong><u>{{ offer['Name'] }}</u></strong> <small>@{{ offer['Username'] }}</small>
                                                 Departure: {{ offer['Departure'] }}
-                                                <br>
-                                                Dates: {{ (offer['StartDate']).strftime('%b %d') }} - {{ (offer['EndDate']).strftime('%b %d') }}
-                                                <br>
-                                                Passengers: {{ offer['Passengers'] }}
                                             </p>
                                             </div>
                                             <nav class="level is-mobile">
@@ -81,7 +76,7 @@
                                     </div>
                                     <div class="buttons">
                                         <a class="button has-background-primary is-fullwidth" href="index.html">
-                                        <strong>Request info</strong>
+                                        <strong>More info</strong>
                                         </a>
                                     </div>
                                 </div>
