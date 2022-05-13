@@ -31,30 +31,30 @@
                             <article class="media">
                                 <div class="media-left">
                                     <figure class="image is-128x128">
-                                    <img class="offer_img" src="{{ url_for('static', filename=offer['Picture']) }}" alt="Image">
+                                    <img class="offer_img" src="{{ url_for('static', filename='OffersPics/'+offer['Picture']) }}" alt="Image">
                                     </figure>
                                 </div>
                                 <div class="media-content">
                                     <div class="content">
                                     <p>
-                                        <strong><u>{{ offer['Name'] }}</u></strong> <small>@{{ offer['Username'] }}</small> <small>posted on {{ (offer['OfferDate']).strftime('%b %d, %H:%m') }}</small>
+                                        <strong><u>{{ offer['FirstName'] }}</u></strong> <small>@{{ offer['Username'] }}</small> <small>posted on {{ offer['OfferDateTime'] }}</small>
                                         <br>
-                                        Departure: {{ offer['Departure'] }}
+                                        Departure: {{ offer['PortDeparture'] }}
                                         <br>
-                                        Dates: {{ (offer['StartDate']).strftime('%b %d') }} - {{ (offer['EndDate']).strftime('%b %d') }}
+                                        Dates: {{ offer['DateDeparture'] }} - {{ offer['DateDeparture'] }}
                                         <br>
-                                        Passengers: {{ offer['Passengers'] }}
+                                        Passengers: {{ offer['Pax'] }}
                                     </p>
                                     </div>
                                     <nav class="level is-mobile">
                                     <div class="level-left">
                                         <a class="level-item" aria-label="like">
                                             <span class="icon-text">
-                                                {% if offer['Likes'] > 0 %}
+                                                {% if ((0 if offer['LikeCount'] is none else offer['LikeCount']) | int) > 0 %}
                                                 <span class="icon">
                                                     <i class="fas fa-heart has-text-primary"></i>
                                                 </span>
-                                                <span class="has-text-primary">{{ offer['Likes'] }}</span>
+                                                <span class="has-text-primary">{{ ((0 if offer['LikeCount'] is none else offer['LikeCount']) | int) }}</span>
                                                 {% else %}
                                                 <span class="icon">
                                                     <i class="fas fa-heart has-text-grey-light"></i>

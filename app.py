@@ -1,8 +1,9 @@
 from flask import Flask, render_template
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from data import offers
+# from data import offers
 from datetime import datetime
+import database
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -36,9 +37,12 @@ def signup():
 @app.route("/feed")
 def feed():
     title = 'SeaYou - My Feed'
-    return render_template('feed.html', title=title, offers=offers)
+    users = database.get_users()
+    offers = database.get_offers()
+    return render_template('feed.html', title=title, offers=offers, users=users)
 
 @app.route("/new")
 def new():
     title = 'SeaYou - New Offer'
+    offers = database.get_offers()
     return render_template('new.html', title=title, offers=offers)
