@@ -1,4 +1,5 @@
 import sqlite3
+from tkinter.messagebox import NO
 
 def query(query_text, *param):
     conn = sqlite3.connect('seayou.db')
@@ -40,4 +41,20 @@ def get_offers():
                 on offers.OfferId = L.OfferId''')
 
 def get_users():
-    return query('SELECT * FROM Users')
+    return query('''SELECT * FROM Users''')
+
+def get_client_by_username(Username):
+    conn = sqlite3.connect('seayou.db')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Users WHERE USERNAME = ?", [Username])
+    column_names = []
+    for column in cur.description:
+        column_names.append(column[0])
+    dicts = []
+    for row in cur:
+        d = dict(zip(column_names, row))
+        dicts.append(d)
+    if len(dicts) > 0:
+        return dicts[0]
+    else:
+        return None

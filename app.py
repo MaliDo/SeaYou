@@ -1,8 +1,9 @@
+from http import client
 import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
-from flask import Flask, render_template, request
-from flask_login import LoginManager, login_user, login_required
+from flask import Flask, render_template, request, url_for, redirect
+from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 # from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 # from data import offers
@@ -15,9 +16,7 @@ login_manager = LoginManager()
 
 login_manager.init_app(app)
 
-users = {
-    "admin": generate_password_hash("admin123"),
-}
+users = database.get_users()
 
 app.secret_key = b'qwertyu1234567'
 
@@ -64,16 +63,16 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # Login and validate the user.
-        print('username', form.username.data)
         username = form.username.data
         password = form.password.data
-        if username in users and \
-            check_password_hash(users.get(username), password):
+
+        client = database.get_client_by_username(username)
+
+        if client and \
+            check_password_hash(client['PasswordHash'], password):
             user = User(username)
         # user should be an instance of your `User` class
             login_user(user)
-
-            flask.flash('Logged in successfully.')
 
             next = flask.request.args.get('next')
             # is_safe_url should check if the url is safe for redirects.
@@ -82,13 +81,20 @@ def login():
                 return flask.abort(400)
 
             return flask.redirect(next or flask.url_for('feed'))
+    flask.flash('Logged in successfully.')
     title = 'SeaYou - LogIn'
-    return flask.render_template('login.html', form=form, title=title)
+    return flask.render_template('login.html', form=form, title=title, users=users)
 
 @app.route("/")
 def main():
     title = 'SeaYou'
     return render_template('home.html', title=title)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main'))
 
 @app.route("/signup")
 def signup():
@@ -99,9 +105,9 @@ def signup():
 @login_required
 def feed():
     title = 'SeaYou - My Feed'
-    users = database.get_users()
     offers = database.get_offers()
-    return render_template('feed.html', title=title, offers=offers, users=users)
+    user = current_user
+    return render_template('feed.html', title=title, offers=offers, user=user)
 
 @app.route("/new")
 @login_required
@@ -109,3 +115,7 @@ def new():
     title = 'SeaYou - New Offer'
     offers = database.get_offers()
     return render_template('new.html', title=title, offers=offers)
+
+@app.route("/test")
+def test():
+    return render_template('test.html', users=users)

@@ -17,6 +17,20 @@
         </a>
     </div>
 </div>
+<div class="navbar-item">
+    <div class="buttons">
+      <a class="button has-background-primary-light" style="min-width: 100px; font-weight: bold" href="index.html">
+        <strong>{{ user.username }}</strong>
+      </a>
+    </div>
+</div>
+<div class="navbar-item">
+    <div class="buttons">
+        <a class="button has-background-primary-light" href="{{ url_for('logout') }}">
+        <strong>Log out</strong>
+        </a>
+    </div>
+</div>
 {% endblock %}
 
 {% block feed %}
