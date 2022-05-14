@@ -2,34 +2,36 @@
 
 {% block login %}
   <div class="field is-centered">
-    <form class="box login" style="width: 30%; margin: 30pt auto;">
+    <form method="POST" action="{{ url_for('login') }}" class="box login" style="width: 30%; margin: 30pt auto;">
       <div class="field">
+        {% for field in form %}
+        {% if field.type == 'StringField' %}
         <div class="field">
-          <label class="label">Email</label>
+          <label class="label">{{ field.label(class_='label') }}</label>
           <div class="control">
-            <input class="input is-primary" type="email" placeholder="e.g. h.potter@hogwards.edu">
+            {{ field(class_='input is-primary', placeholder_='e.g. h.potter@hogwards.edu') }}
           </div>
         </div>
-      
+        {% elif field.type == 'PasswordField' %}
         <div class="field">
-          <label class="label">Password</label>
+          <label class="label">{{ field.label(class_='label') }}</label>
           <div class="control">
-            <input class="input is-primary" type="password" placeholder="********">
+            {{ field(class_='input is-primary', placeholder_='*******') }}
           </div>
         </div>
-      
-        <div class="buttons">
-          <a class="button has-background-primary" style="width: 100px" href="{{ url_for('feed') }}">
-          <strong>Log In</strong>
-          </a>
+        {% elif field.type == 'SubmitField' %}  
+        <div class="buttons is-centered">
+          {{ field(class_='button has-background-primary', style_='width: 100px; font-weight: bold') }}
         </div>
-
-        <div class="buttons">
+        {% else %}  
+          {{ field }}
+        {% endif %}
+        {% endfor %}
+        <div class="buttons is-centered">
           <a class="button has-background-primary" style="width: 100px" href="{{ url_for('signup') }}">
           <strong>Sign Up</strong>
           </a>
         </div>
-
       </div>
     </form>
   </div>
