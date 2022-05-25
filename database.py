@@ -58,3 +58,15 @@ def get_client_by_username(Username):
         return dicts[0]
     else:
         return None
+
+def create_user(first_name, last_name, username, dob, email, password_hash, about):
+    return query('''INSERT INTO USERS
+                    ([Username],
+                    [FirstName],
+                    [LastName],
+                    [Email],
+                    [PasswordHash],
+                    [DoB],
+                    [Bio])
+                VALUES (?,?,?,?,?,?,?)''',
+                username, first_name, last_name, email, password_hash, dob, about)

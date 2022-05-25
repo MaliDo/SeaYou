@@ -1,13 +1,15 @@
+from crypt import methods
 from http import client
 import flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
-from flask import Flask, render_template, request, url_for, redirect
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField
+from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 # from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 # from data import offers
 from datetime import datetime
+from database import create_user
 import database
 from urllib.parse import urlparse, urljoin
 
@@ -44,6 +46,16 @@ class User():
     def get(cls, username):
         return User(username)
  
+class SignUpForm(FlaskForm): 
+    first_name = StringField('First name')
+    last_name = StringField('Last name')
+    username = StringField('Username')
+    dob = StringField('Date of birth')
+    email = StringField('Email')
+    password_hash = PasswordField('Password')
+    about = TextAreaField('About info')
+    submit = SubmitField('Submit')
+
 class LoginForm(FlaskForm):
     username = StringField('Username')
     password = PasswordField('Password')
@@ -54,6 +66,11 @@ def is_safe_url(target):
     test_url = urlparse(urljoin(request.host_url, target))
     return test_url.scheme in ('http', 'https') and \
            ref_url.netloc == test_url.netloc
+
+@app.route("/")
+def main():
+    title = 'SeaYou'
+    return render_template('home.html', title=title)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -79,27 +96,40 @@ def login():
             # See http://flask.pocoo.org/snippets/62/ for an example.
             if not is_safe_url(next):
                 return flask.abort(400)
-
-            return flask.redirect(next or flask.url_for('feed'))
-    flask.flash('Logged in successfully.')
+            flash('Logged in successfully.')
+            return redirect(next or flask.url_for('feed'))
     title = 'SeaYou - LogIn'
     return flask.render_template('login.html', form=form, title=title, users=users)
 
-@app.route("/")
-def main():
-    title = 'SeaYou'
-    return render_template('home.html', title=title)
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    form = SignUpForm()
+    if form.validate_on_submit():
+        # Login and validate the user.
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        username = form.username.data
+        dob = form.dob.data
+        email = form.email.data
+        password_hash = generate_password_hash(form.password_hash.data)
+        about = form.about.data
+        submit = form.submit.data
+        create_user(first_name, last_name, username, dob, email, password_hash, about)
+        user = User(username)
+        login_user(user)
+        next = flask.request.args.get('next')
+        if not is_safe_url(next):
+            return flask.abort(400)
+        flash('Logged in successfully.')
+        return redirect(next or flask.url_for('feed'))
+    title = 'SeaYou - SignUp'
+    return render_template('signup.html', title=title, form=form)
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('main'))
-
-@app.route("/signup")
-def signup():
-    title = 'SeaYou - SignUp'
-    return render_template('signup.html', title=title)
 
 @app.route("/feed")
 @login_required

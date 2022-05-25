@@ -9,70 +9,69 @@
         <div class="columns">
 
           <div class="column">
+            {% for field in form %}
+            {% if field.id == 'first_name' %}
             <div class="field">
-              <label class="label">First name</label>
+              <label class="label">{{ field.label(class_='label') }}</label>
               <div class="control">
-                <input class="input is-primary" type="text" placeholder="Harry">
+                {{ field(class_='input is-primary', placeholder_='Harry') }}
               </div>
             </div>
-
+            {% elif field.id == 'username' %}
             <div class="field">
-              <label class="label">Username</label>
+              <label class="label">{{ field.label(class_='label') }}</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input is-success is-primary" type="text" placeholder="HPotter" value="HPotter">
+                {{ field(class_='input is-success is-primary', placeholder_='HPotter') }}
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                  </span>
               </div>
-              <p class="help is-success">This username is available</p>
             </div>
-
+            {% endif %}
+            {% endfor %}
           </div>
 
           <div class="column">
+            {% for field in form %}
+            {% if field.id == 'last_name' %}
             <div class="field">
-              <label class="label">Last name</label>
+              <label class="label">{{ field.label(class_='label') }}</label>
               <div class="control">
-                <input class="input is-primary" type="text" placeholder="Potter">
+                {{ field(class_='input is-primary', placeholder_='Potter') }}
               </div>
             </div>
-
+            {% elif field.id == 'dob' %}
             <div class="field control is-expanded">
-              <label class="label">Date of birth</label>
+              <label class="label">{{ field.label(class_='label') }}</label>
               <div class="control">
-                <input class="input is-primary" type="date" placeholder="Date of arrival">
+                {{ field(class_='input is-primary', type='date', placeholder_='Date of arrival') }}
               </div>
             </div>
-
+            {% endif %}
+            {% endfor %}
           </div>
 
         </div>
-
+        {% for field in form %}
+        {% if field.id == 'email' %}
         <div class="field">
-          <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </span>
+          <label class="label">{{ field.label(class_='label') }}</label>
+            <div class="control">
+              {{ field(class_='input is-primary', type='email', placeholder_='Email input', value='hello@') }}
             </div>
-          <p class="help is-danger">This email is invalid</p>
         </div>
-
+        {% elif field.id == 'password_hash' %}
         <div class="field">
+          <label class="label">{{ field.label(class_='label') }}</label>
           <p class="control has-icons-left">
-            <input class="input is-primary" type="password" placeholder="Password">
+            {{ field(class_='input is-primary', type='password', placeholder_='Password') }}
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
           </p>
         </div>
+        {% endif %}
+        {% endfor %}
 
       </div>
 
