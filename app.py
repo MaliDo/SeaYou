@@ -1,6 +1,3 @@
-import sys
-print(sys.executable)
-
 from crypt import methods
 from http import client
 import flask
