@@ -59,7 +59,7 @@ def get_client_by_username(Username):
     else:
         return None
 
-def create_user(first_name, last_name, username, dob, email, password_hash, about):
+def create_user(first_name, last_name, username, dob, email, password_hash, bio):
     return query('''INSERT INTO USERS
                     ([Username],
                     [FirstName],
@@ -69,4 +69,4 @@ def create_user(first_name, last_name, username, dob, email, password_hash, abou
                     [DoB],
                     [Bio])
                 VALUES (?,?,?,?,?,?,?)''',
-                username, first_name, last_name, email, password_hash, dob, about)
+                username, first_name, last_name, email, password_hash, dob, bio)

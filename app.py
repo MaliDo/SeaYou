@@ -1,3 +1,6 @@
+import sys
+print(sys.executable)
+
 from crypt import methods
 from http import client
 import flask
@@ -5,11 +8,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, TextAreaField
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
-# from flask_httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-# from data import offers
+from data import offers
 from datetime import datetime
-from database import create_user
 import database
 from urllib.parse import urlparse, urljoin
 
@@ -53,7 +55,7 @@ class SignUpForm(FlaskForm):
     dob = StringField('Date of birth')
     email = StringField('Email')
     password_hash = PasswordField('Password')
-    about = TextAreaField('About info')
+    bio = TextAreaField('About info')
     submit = SubmitField('Submit')
 
 class LoginForm(FlaskForm):
@@ -70,7 +72,8 @@ def is_safe_url(target):
 @app.route("/")
 def main():
     title = 'SeaYou'
-    return render_template('home.html', title=title)
+    user = current_user
+    return render_template('home.html', title=title, user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -99,7 +102,8 @@ def login():
             flash('Logged in successfully.')
             return redirect(next or flask.url_for('feed'))
     title = 'SeaYou - LogIn'
-    return flask.render_template('login.html', form=form, title=title, users=users)
+    user = current_user
+    return flask.render_template('login.html', form=form, title=title, users=users, user=user)
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -112,18 +116,18 @@ def signup():
         dob = form.dob.data
         email = form.email.data
         password_hash = generate_password_hash(form.password_hash.data)
-        about = form.about.data
-        submit = form.submit.data
-        create_user(first_name, last_name, username, dob, email, password_hash, about)
-        user = User(username)
-        login_user(user)
+        bio = form.bio.data
+        database.create_user(first_name, last_name, username, dob, email, password_hash, bio)
+        new_user = User(username)
+        login_user(new_user)
         next = flask.request.args.get('next')
         if not is_safe_url(next):
             return flask.abort(400)
         flash('Logged in successfully.')
         return redirect(next or flask.url_for('feed'))
     title = 'SeaYou - SignUp'
-    return render_template('signup.html', title=title, form=form)
+    user = current_user
+    return render_template('signup.html', title=title, form=form, user=user)
 
 @app.route("/logout")
 @login_required
@@ -144,7 +148,16 @@ def feed():
 def new():
     title = 'SeaYou - New Offer'
     offers = database.get_offers()
-    return render_template('new.html', title=title, offers=offers)
+    user = current_user
+    return render_template('new.html', title=title, offers=offers, user=user)
+
+@app.route("/featured")
+@login_required
+def featured():
+    title = 'SeaYou - Featured Offers'
+    offers = database.get_offers()
+    user = current_user
+    return render_template('featured.html', title=title, offers=offers, user=user)
 
 @app.route("/test")
 def test():

@@ -1,0 +1,104 @@
+{% extends 'main.html' %}
+
+{% block navbar %}
+<div class="navbar-item">
+    <div class="buttons">
+        <a class="button" href="{{ url_for('featured') }}">
+            <span class="icon">
+            <i class="fas fa-heart has-text-primary"></i>
+            </span>
+        </a>
+    </div>
+</div>
+<div class="navbar-item">
+    <div class="buttons">
+        <a class="button has-background-primary-light" href="{{ url_for('feed') }}">
+        <strong>Inbox</strong>
+        </a>
+    </div>
+</div>
+<div class="navbar-item">
+    <div class="buttons">
+      <a class="button has-background-primary-light" style="min-width: 100px; font-weight: bold" href="index.html">
+        <strong>{{ user.username }}</strong>
+      </a>
+    </div>
+</div>
+<div class="navbar-item">
+    <div class="buttons">
+        <a class="button has-background-primary-light" href="{{ url_for('logout') }}">
+        <strong>Log out</strong>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block featured %}
+      <div class="columns">
+          <div class="column is-three-fifths">
+              <section class="section">
+              <h1 class="title" style="text-align: center;">Featured</h1>
+                  {% for offer in offers %}
+                  {% if ((0 if offer['LikeCount'] is none else offer['LikeCount']) | int) > 0 %}
+                      <div class="box offer has-background-primary-light">
+                          <div class="columns">
+                              <div class="column is-two-thirds">
+                                  <article class="media">
+                                      <div class="media-left">
+                                          <figure class="image is-128x128">
+                                          <img class="offer_img" src="{{ url_for('static', filename='OffersPics/'+offer['Picture']) }}" alt="Image">
+                                          </figure>
+                                      </div>
+                                      <div class="media-content">
+                                          <div class="content">
+                                            <p>
+                                              <strong><u>{{ offer['FirstName'] }}</u></strong> <small>@{{ offer['Username'] }}</small> <small>posted on {{ offer['OfferDateTime'] }}</small>
+                                              <br>
+                                              Departure: {{ offer['PortDeparture'] }}
+                                              <br>
+                                              Dates: {{ offer['DateDeparture'] }} - {{ offer['DateDeparture'] }}
+                                              <br>
+                                              Passengers: {{ offer['Pax'] }}
+                                            </p>  
+                                          </div>
+                                          <nav class="level is-mobile">
+                                          <div class="level-left">
+                                              <a class="level-item" aria-label="like">
+                                                  <span class="icon-text">
+                                                      {% if ((0 if offer['LikeCount'] is none else offer['LikeCount']) | int) > 0 %}
+                                                      <span class="icon">
+                                                          <i class="fas fa-heart has-text-primary"></i>
+                                                      </span>
+                                                      <span class="has-text-primary">{{ ((0 if offer['LikeCount'] is none else offer['LikeCount']) | int) }}</span>
+                                                      {% else %}
+                                                      <span class="icon">
+                                                          <i class="fas fa-heart has-text-grey-light"></i>
+                                                      </span>
+                                                      {% endif %}
+                                                  </span>
+                                              </a>
+                                          </div>
+                                          </nav>
+                                      </div>
+                                  </article>
+                              </div>
+                              <div class="column">
+                                  <div class="buttons">
+                                      <a class="button has-background-primary is-fullwidth" href="index.html">
+                                      <strong>Accept</strong>
+                                      </a>
+                                  </div>
+                                  <div class="buttons">
+                                      <a class="button has-background-primary is-fullwidth" href="index.html">
+                                      <strong>More info</strong>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  {% endif %}
+                  {% endfor %}
+              </section>
+          </div>
+      </div>
+{% endblock %}

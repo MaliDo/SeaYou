@@ -3,11 +3,11 @@
 {% block navbar %}
 <div class="navbar-item">
     <div class="buttons">
-        <button class="button">
+        <a class="button" href="{{ url_for('featured') }}">
             <span class="icon">
             <i class="fas fa-heart has-text-primary"></i>
             </span>
-        </button>
+        </a>
     </div>
 </div>
 <div class="navbar-item">
@@ -38,6 +38,11 @@
     <div class="column is-two-thirds">
         <section class="section">
         <h1 class="title">OFFERS</h1>
+        <div class="buttons">
+            <a class="button has-background-primary" href="{{ url_for('new') }}">
+            <strong>New Offer</strong>
+            </a>
+        </div>
             {% for offer in offers %}
                 <div class="box offer has-background-primary-light">
                     <div class="columns">
@@ -135,7 +140,7 @@
                     <div class="field control is-expanded">
                         <input class="input is-primary" type="number" placeholder="Number of passengers">
                     </div>
-                    <div class="field has-addons">
+                    <div class="field has-addons is-grouped">
                         <div class="control">
                           <span class="select is-primary">
                             <select>
@@ -151,7 +156,7 @@
                               <option>0 - 50</option>
                               <option>50 - 100</option>
                               <option>100 - 150</option>
-                              <option>more than 50</option>
+                              <option>more than 150</option>
                             </select>
                         </div>
                     </div>
