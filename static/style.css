@@ -1,31 +1,38 @@
-
-.back_pattern    {
-    position: fixed;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background-color: #99ece0;
-    opacity: 0.2;
-    background-image:  radial-gradient(#007664 1.55px, transparent 1.55px), radial-gradient(#007664 1.55px, #99ece0 1.55px);
-    background-size: 62px 62px;
-    background-position: 0 0,31px 31px;
+.back_pattern {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-color: #99ece0;
+  opacity: 0.2;
+  background-image: radial-gradient(#007664 1.55px, transparent 1.55px),
+    radial-gradient(#007664 1.55px, #99ece0 1.55px);
+  background-size: 62px 62px;
+  background-position: 0 0, 31px 31px;
 }
 
 .navbar {
-    box-shadow:  10px 5px 5px grey;
-    border: solid 1pt #007664;
+  box-shadow: 10px 5px 5px grey;
+  border: solid 1pt #007664;
 }
 .login {
-    border: solid 1pt #007664;
-    box-shadow: 10px 5px 5px #007664;
+  border: solid 1pt #007664;
+  box-shadow: 10px 5px 5px #007664;
 }
 
 .offer {
-    border: solid 1px #007664;
-    box-shadow: 7px 4px 4px #007664;
+  border: solid 1px #007664;
+  box-shadow: 7px 4px 4px #007664;
 }
 
 .offer_img {
-    border: #007664 solid 1px;
-    box-shadow: 5px 2px 2px #007664;
+  border: #007664 solid 1px;
+  box-shadow: 5px 2px 2px #007664;
+}
+
+.heart-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }

@@ -1,49 +1,80 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet", href="{{ url_for('static', filename='style.css') }}">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      ,
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
   </head>
 
   <body class="has-navbar-fixed-top">
     <div class="back_pattern"></div>
-    <nav class="navbar is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          {% if user.is_authenticated %}
-          <a class="navbar-item" href="{{ url_for('feed') }}">
-            <img src="{{ url_for('static', filename='logo1.png') }}"/>
-          </a>
-          {% else %}
-          <a class="navbar-item" href="{{ url_for('main') }}">
-            <img src="{{ url_for('static', filename='logo1.png') }}"/>
-          </a>
-          {% endif %}
-        </div>
-      
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-      
-          </div>
-      
-          <div class="navbar-end">
-            {% block navbar %}
-            {% endblock %}
-          </div>
-        </div>
+    <nav
+      class="navbar is-fixed-top has-background-primary"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        {% if user.is_authenticated %}
+        <a class="navbar-item" href="{{ url_for('feed') }}">
+          <img src="{{ url_for('static', filename='logo1.png') }}" />
+        </a>
+        {% else %}
+        <a class="navbar-item" href="{{ url_for('main') }}">
+          <img src="{{ url_for('static', filename='logo1.png') }}" />
+        </a>
+        {% endif %}
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start"></div>
+
+        <div class="navbar-end">{% block navbar %} {% endblock %}</div>
+      </div>
     </nav>
-    {% block home %}
-    {% endblock %}
-    {% block login %}
-    {% endblock %}
-    {% block signup %}
-    {% endblock %}
-    {% block feed %}
-    {% endblock %}
-    {% block featured %}
-    {% endblock %}
+    {% block home %} {% endblock %} {% block login %} {% endblock %} {% block
+    signup %} {% endblock %} {% block feed %} {% endblock %} {% block featured
+    %} {% endblock %}
+    <script>
+      function toggleLike(offerId) {
+        offerId = parseInt(offerId); // Ensure it's treated as a number
+
+        fetch(`/like/${offerId}`, {
+          method: "POST",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const countSpan = document.getElementById(`like-count-${offerId}`);
+            const heartIcon = document.getElementById(`heart-icon-${offerId}`);
+            countSpan.textContent = data.likeCount;
+
+            if (data.liked) {
+              heartIcon.classList.remove("has-text-grey-light");
+              heartIcon.classList.add("has-text-primary");
+            } else {
+              heartIcon.classList.remove("has-text-primary");
+              heartIcon.classList.add("has-text-grey-light");
+            }
+          })
+          .catch((err) => {
+            console.error("Error toggling like:", err);
+          });
+      }
+    </script>
   </body>
 </html>

@@ -1,42 +1,53 @@
-{% extends 'main.html' %}
-
-{% block signup %}
+{% extends 'main.html' %} {% block signup %}
 <div class="field is-centered">
-  <form class="box login" style="width: 50%; margin: 30pt auto;" method="POST">
+  <form
+    class="box login"
+    style="width: 50%; margin: 30pt auto"
+    method="POST"
+    enctype="multipart/form-data"
+  >
     <div class="columns field">
-
       <div class="column is-two-thirds">
         <div class="columns">
-
           <div class="column">
             <div class="field">
-              <label class="label">{{ form.first_name.label(class_='label') }}</label>
+              <label class="label"
+                >{{ form.first_name.label(class_='label') }}</label
+              >
               <div class="control">
-                {{ form.first_name(class_='input is-primary', placeholder_='Harry') }}
+                {{ form.first_name(class_='input is-primary',
+                placeholder_='Harry') }}
               </div>
             </div>
             <div class="field">
-              <label class="label">{{ form.username.label(class_='label') }}</label>
+              <label class="label"
+                >{{ form.username.label(class_='label') }}</label
+              >
               <div class="control has-icons-left has-icons-right">
-                {{ form.username(class_='input is-success is-primary', placeholder_='HPotter') }}
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
-                  </span>
+                {{ form.username(class_='input is-success is-primary',
+                placeholder_='HPotter') }}
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
               </div>
             </div>
           </div>
 
           <div class="column">
             <div class="field">
-              <label class="label">{{ form.last_name.label(class_='label') }}</label>
+              <label class="label"
+                >{{ form.last_name.label(class_='label') }}</label
+              >
               <div class="control">
-                {{ form.last_name(class_='input is-primary', placeholder_='Potter') }}
+                {{ form.last_name(class_='input is-primary',
+                placeholder_='Potter') }}
               </div>
             </div>
             <div class="field control is-expanded">
               <label class="label">{{ form.dob.label(class_='label') }}</label>
               <div class="control">
-                {{ form.dob(class_='input is-primary', type='date', placeholder_='Date of arrival') }}
+                {{ form.dob(class_='input is-primary', type='date',
+                placeholder_='Date of arrival') }}
               </div>
             </div>
           </div>
@@ -44,20 +55,25 @@
 
         <div class="field">
           <label class="label">{{ form.bio.label(class_='label') }}</label>
-            <div class="control">
-              {{ form.bio(class_='textarea has-fixed-size is-primary', placeholder_='Tell about yourself') }}
-            </div>
+          <div class="control">
+            {{ form.bio(class_='textarea has-fixed-size is-primary',
+            placeholder_='Tell about yourself') }}
+          </div>
         </div>
         <div class="field">
           <label class="label">{{ form.email.label(class_='label') }}</label>
-            <div class="control">
-              {{ form.email(class_='input is-primary', type='email', placeholder_='Email input', value='hello@') }}
-            </div>
+          <div class="control">
+            {{ form.email(class_='input is-primary', type='email',
+            placeholder_='Email input', value='hello@') }}
+          </div>
         </div>
         <div class="field">
-          <label class="label">{{ form.password_hash.label(class_='label') }}</label>
+          <label class="label"
+            >{{ form.password_hash.label(class_='label') }}</label
+          >
           <p class="control has-icons-left">
-            {{ form.password_hash(class_='input is-primary', type='password', placeholder_='Password') }}
+            {{ form.password_hash(class_='input is-primary', type='password',
+            placeholder_='Password') }}
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -69,12 +85,16 @@
         {{ form.csrf_token }}
       </div>
 
-      <div class="column" style="text-align: center;">
+      <div class="column" style="text-align: center">
         <div class="field">
           <span class="control">
             <label class="label">Profile picture</label>
             <figure class="image is-1by1">
-              <img style="border: 1px solid black;" class="is-rounded" src="{{ url_for('static', filename='chebu.jpg') }}">
+              <img
+                style="border: 1px solid black"
+                class="is-rounded"
+                src="{{ url_for('static', filename='chebu.jpg') }}"
+              />
             </figure>
           </span>
         </div>
